@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/cubit/cubit.dart';
@@ -28,38 +29,50 @@ class SearchScreen extends StatelessWidget {
                     defaultFromField(
                       typeInput: TextInputType.text,
                       validate: (String v) {
-                        if (v.isEmpty) return 'The Search is not be empty';
+                        if (v.isEmpty){
+                          return 'The Search is not be empty';
+                        }
                         return null;
                       },
+
                       controller: text,
                       prefIcon: Icons.search,
                       label: 'Search',
                       hint: 'Search',
-                      onChange: (value) {
-                        cubit.getSearchData(v: value);
-                      },
+                      onChange: (val) {
+                        cubit.getSearchData(v: val);
+                      } ,
 
                     ),
 
-                    Expanded(
-                      child: ListView.separated(
-                        itemCount:cubit.search.length ,
-                        itemBuilder: (context,index) {
-                          return Business(
-                            w: media.size.width * 0.3,
-                            h: media.size.height * 0.1,
-                            ctx: context,
-                            artical: searchData[index]  ,
-                          );
-                        },
-                        separatorBuilder: (context, index) => Container(
-                          width: double.infinity,
-                          height: 1.0,
-                          color: Colors.grey,
-                          margin: EdgeInsets.all(15),
-                        ),
-                        physics: BouncingScrollPhysics(),
 
+                    Expanded(
+                      child: ConditionalBuilder(
+                        condition: cubit.search.length>0,
+                        fallback: (context) => Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        builder:(context) {
+                          return ListView.separated(
+                            itemCount:cubit.search.length ,
+                            itemBuilder: (context,index) {
+                              return Business(
+                                w: media.size.width * 0.3,
+                                h: media.size.height * 0.1,
+                                ctx: context,
+                                artical: searchData[index]  ,
+                              );
+                            },
+                            separatorBuilder: (context, index) => Container(
+                              width: double.infinity,
+                              height: 1.0,
+                              color: Colors.grey,
+                              margin: EdgeInsets.all(15),
+                            ),
+                            physics: BouncingScrollPhysics(),
+
+                          );
+                        }
                       ),
                     ),
 

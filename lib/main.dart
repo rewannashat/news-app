@@ -44,7 +44,7 @@ MyApp(this.formator);
                   backgroundColor: Colors.white,
                   //Color(0xff558daa)
                   elevation: 0,
-                  backwardsCompatibility: false,
+                 // backwardsCompatibility: false,
                   systemOverlayStyle: const SystemUiOverlayStyle(
                       statusBarColor: Colors.white,
                       statusBarIconBrightness: Brightness.dark),
@@ -74,7 +74,7 @@ MyApp(this.formator);
                   backgroundColor: HexColor('333739'),
                   //Color(0xff558daa)
                   elevation: 0,
-                  backwardsCompatibility: false,
+                //  backwardsCompatibility: false,
                   systemOverlayStyle: SystemUiOverlayStyle(
                       statusBarColor: HexColor('333739'),
                       statusBarIconBrightness: Brightness.light),
